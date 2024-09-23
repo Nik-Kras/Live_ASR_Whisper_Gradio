@@ -1,0 +1,12 @@
+datasets
+faster-whisper==1.0.3 
+gradio
+importlib-metadata
+jaraco.collections
+librosa
+nltk
+pip-chill
+silero-vad
+tokenize-uk
+tomli
+wtpsplit
