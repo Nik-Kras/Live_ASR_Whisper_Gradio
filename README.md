@@ -40,3 +40,14 @@ To verify:
 ls /usr/lib/x86_64-linux-gnu/libcudnn* | grep libcudnn_ops_infer.so.8
 ls /usr/lib/x86_64-linux-gnu/libcudnn* | grep libcudnn_cnn_infer.so.8
 ```
+
+---
+
+Alternative solution:
+
+```bash
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-keyring_1.0-1_all.deb 
+dpkg -i cuda-keyring_1.0-1_all.deb 
+apt update && apt upgrade
+apt install libcudnn8 libcudnn8-dev
+```

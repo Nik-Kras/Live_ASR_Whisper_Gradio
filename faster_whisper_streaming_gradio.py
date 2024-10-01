@@ -126,7 +126,14 @@ def preprocess_audio(y):
     return y
 
 
-model = "large-v2" # "distil-large-v3" # See available models here: https://huggingface.co/Systran
+# See available models here: https://huggingface.co/Systran
+RECOMMENDED_MODELS = [
+    "deepdml/faster-whisper-large-v3-turbo-ct2",
+    "large-v2",
+    "distil-large-v3"
+]
+
+model = RECOMMENDED_MODELS[0]
 whisper_streaming_model = FasterWhisperStreaming(model_size_or_path=model)
 
 
