@@ -10,3 +10,4 @@ silero-vad
 tokenize-uk
 tomli
 wtpsplit
+torch==2.3.1
