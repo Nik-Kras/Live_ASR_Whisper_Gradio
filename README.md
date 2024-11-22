@@ -5,40 +5,41 @@
 1. Environment
 
 ```bash
-python -m venv venv
-source venv/bin/activate
-pip install -f requirements.txt
+sudo apt update
+sudo apt install -y make build-essential libssl-dev zlib1g-dev \
+    libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
+    libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+
+curl https://pyenv.run | bash
 ```
 
-or
+```bash
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+exec "$SHELL"
+```
 
 ```bash
-pip install uv
-uv python install 3.9
-uv venv --python 3.9
-source .venv/bin/activate
+pyenv install 3.9.17 
+pyenv global 3.9.17
+```
+
+```bash
+python -m venv venv
+source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-2. Error: libcudnn_ops_infer.so.8: cannot open shared object file: No such file or directory
-
-Solution for Ubuntu 22.04
+2. Error `Unable to load any of {libcudnn_ops.so.9.1.0, libcudnn_ops.so.9.1, libcudnn_ops.so.9, libcudnn_ops.so}`:
 
 ```bash
-pip install gdown
-gdown 1wj9UU7xjF_1R21ysUxg7o2rULmVVz79-
-sudo apt install nvidia-cuda-toolkit
-sudo dpkg -i cudnn-local-repo-ubuntu2204-8.9.7.29_1.0-1_amd64.deb
-sudo find /var/cudnn-local-repo-ubuntu2204-8.9.7.29/ -name '*keyring.gpg' -exec cp {} /usr/share/keyrings/ \;
+wget https://developer.download.nvidia.com/compute/cudnn/9.5.1/local_installers/cudnn-local-repo-ubuntu2404-9.5.1_1.0-1_amd64.deb
+sudo dpkg -i cudnn-local-repo-ubuntu2404-9.5.1_1.0-1_amd64.deb
+sudo cp /var/cudnn-local-repo-ubuntu2404-9.5.1/cudnn-*-keyring.gpg /usr/share/keyrings/
 sudo apt-get update
-sudo apt-get install --reinstall libcudnn8 libcudnn8-dev libcudnn8-samples
-```
-
-To verify:
-
-```bash
-ls /usr/lib/x86_64-linux-gnu/libcudnn* | grep libcudnn_ops_infer.so.8
-ls /usr/lib/x86_64-linux-gnu/libcudnn* | grep libcudnn_cnn_infer.so.8
+sudo apt-get -y install cudnn
 ```
 
 ---
